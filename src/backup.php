@@ -79,25 +79,25 @@ class TicTacToe
                         <b>It's player {$this->player}'s turn.</b></p>
                 </div>";
 
-         }
-         else {                                  //the game is over someone has won the game or there was a tie.
+        }
+        else {                                  //the game is over someone has won the game or there was a tie.
 
-                if ($this->isOver() != "Tie"){   //the game is over and someone has won the game
+            if ($this->isOver() != "Tie"){   //the game is over and someone has won the game
 
-                    echo $this->successMsg("Congratulations dude " . $this->isOver() . ", you've won the game!");
+                echo $this->successMsg("Congratulations dude " . $this->isOver() . ", you've won the game!");
 
-                }
+            }
 
-                else if ($this->isOver() == "Tie"){   //the game is over and is a tie.
+            else if ($this->isOver() == "Tie"){   //the game is over and is a tie.
 
-                    echo $this->errorMsg("Draw match play again, or solve it with a Roshambo!");
+                echo $this->errorMsg("Draw match play again, or solve it with a Roshambo!");
 
-                }
+            }
 
-                session_destroy();
+            session_destroy();
 
-                echo "<p align=\"center\"><input type=\"submit\" name=\"newgame\" value=\"New Game\" /></p>";
-         }
+            echo "<p align=\"center\"><input type=\"submit\" name=\"newgame\" value=\"New Game\" /></p>";
+        }
 
     }
 
@@ -110,29 +110,29 @@ class TicTacToe
 
         $_POST = array_unique($_POST);      //remove duplicate entries on the board
 
-            foreach ($_POST as $key => $value) {            //loop through the $_POST array, looking for the submitted value.
+        foreach ($_POST as $key => $value) {            //loop through the $_POST array, looking for the submitted value.
 
-                    if ($value == $this->player) {          //checking to see if the value in that position is X or O.
+            if ($value == $this->player) {          //checking to see if the value in that position is X or O.
 
-                        $coords = explode("_", $key);       //update the board in that position with the player's X or O.
+                $coords = explode("_", $key);       //update the board in that position with the player's X or O.
 
-                        $this->boardvert[$coords[0]][$coords[1]] = $this->player;  //it is only here that the session
-                                                                                   //array is updated
+                $this->boardvert[$coords[0]][$coords[1]] = $this->player;  //it is only here that the session
+                //array is updated
 
-                        //change the turn to the next player
-                        if ($this->player == "X"){
+                //change the turn to the next player
+                if ($this->player == "X"){
 
-                            $this->player = "O";
+                    $this->player = "O";
 
-                        }
-                        else{
+                }
+                else{
 
-                            $this->player = "X";
+                    $this->player = "X";
 
-                        }
-                        $this->totalMoves++;
-                    }
+                }
+                $this->totalMoves++;
             }
+        }
 
         if ($this->isOver()){
             return;
